@@ -1,0 +1,48 @@
+h1.title {
+  text-align: center;
+  font: 2em "Inconsolata", sans-serif;
+}
+
+body{
+  background-color: #4d4d4d;
+}
+
+p.mainbox {
+  font: 60px "Inconsolata", sans-serif;
+  text-align: right;
+  display: block;
+  margin: auto;
+  width: 90%;
+  height: 65px;
+  border: 3px solid black;
+  padding: 1%;
+  background-color: #e6e6e6;
+}
+
+.numpad{
+  margin-left: 5%;
+  margin-top: 2%;
+}
+
+button.num {
+  width: 90px;
+  height: 90px;
+  margin: 2px;
+  font: 30px "Inconsolata", sans-serif;
+  color: #d9d9d9;
+  background-color: #333333;
+}
+
+button.num0{
+  width: 188px;
+  height: 90px;
+  margin: 2px;
+  font: 30px "Inconsolata", sans-serif;
+  color: #d9d9d9;
+  background-color: #333333;
+}
+
+button:hover{
+  background-color: #33cc33;
+  color: #262626;
+}
