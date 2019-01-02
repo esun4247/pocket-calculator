@@ -1,6 +1,7 @@
 h1.title {
   text-align: center;
   font: 2em "Inconsolata", sans-serif;
+  margin-bottom: 5%;
 }
 
 body{
@@ -12,32 +13,48 @@ p.mainbox {
   text-align: right;
   display: block;
   margin: auto;
-  width: 90%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 95%;
   height: 65px;
   border: 3px solid black;
   padding: 1%;
+  border-radius: 10px;
   background-color: #e6e6e6;
+  text-overflow: clip;
+}
+
+.calc{
+  text-align: center;
+  margin: auto;
+  border: 3px solid black;
+  width: 450px;
+  background-color: #737373;
+  border-radius: 20px;
+  min-width: 450px;
 }
 
 .numpad{
-  margin-left: 5%;
-  margin-top: 2%;
+  margin: 2%;
+  text-align: center;
 }
 
 button.num {
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   margin: 2px;
   font: 30px "Inconsolata", sans-serif;
+  border-radius: 30px;
   color: #d9d9d9;
   background-color: #333333;
 }
 
 button.num0{
-  width: 188px;
-  height: 90px;
+  width: 208px;
+  height: 100px;
   margin: 2px;
   font: 30px "Inconsolata", sans-serif;
+  border-radius: 30px;
   color: #d9d9d9;
   background-color: #333333;
 }
