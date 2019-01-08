@@ -170,7 +170,7 @@ function plusMinus(){
 function percent(){
   console.log(value);
   value = Number(value) * .01;
-  value = value.toPrecision(5);
+  //value = value.toPrecision(5);
   value = String(value);
   console.log(value);
   box = value;
