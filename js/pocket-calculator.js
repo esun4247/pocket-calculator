@@ -1,6 +1,16 @@
 var box = "";
 var value = "";
 var ignoreMinus = 0;
+var replace = 0;
+
+
+function checkReplace(){
+	if(replace == 1){
+  	box = "";
+    value = "";
+    replace = 0;
+  }
+}
 
 function comma(){
   if(Number(value) >= 0){
@@ -31,7 +41,7 @@ function comma(){
       dec = 1;
     }
   }
-  for(let j = box.length; j >= 0; j--){
+  for(let j = box.length-5; j >= 0; j--){
     if(h[j] === "-"){
       h.splice(j, 1);
       neg = 1;
@@ -63,6 +73,7 @@ function comma(){
 }
 
 function num1(){
+  checkReplace();
   box = box + "1";
   value = value + "1";
   comma();
@@ -70,6 +81,7 @@ function num1(){
 }
 
 function num2(){
+  checkReplace();
   box = box + "2";
   value = value + "2";
   comma();
@@ -77,6 +89,7 @@ function num2(){
 }
 
 function num3(){
+  checkReplace();
   box = box + "3";
   value = value + "3";
   comma();
@@ -84,6 +97,7 @@ function num3(){
 }
 
 function num4(){
+  checkReplace();
   box = box + "4";
   value = value + "4";
   comma();
@@ -91,6 +105,7 @@ function num4(){
 }
 
 function num5(){
+  checkReplace();
   box = box + "5";
   value = value + "5";
   comma();
@@ -98,6 +113,7 @@ function num5(){
 }
 
 function num6(){
+  checkReplace();
   box = box + "6";
   value = value + "6";
   comma();
@@ -105,6 +121,7 @@ function num6(){
 }
 
 function num7(){
+  checkReplace();
   box = box + "7";
   value = value + "7";
   comma();
@@ -112,6 +129,7 @@ function num7(){
 }
 
 function num8(){
+  checkReplace();
   box = box + "8";
   value = value + "8";
   comma();
@@ -119,6 +137,7 @@ function num8(){
 }
 
 function num9(){
+  checkReplace();
   box = box + "9";
   value = value + "9";
   comma();
@@ -126,6 +145,7 @@ function num9(){
 }
 
 function num0(){
+  checkReplace();
   if(box == "0"){
   box = 0;
   }else{
@@ -137,6 +157,7 @@ function num0(){
 }
 
 function dec(){
+  checkReplace();
   box = box + ".";
   value = value + ".";
   comma();
@@ -169,12 +190,13 @@ function plusMinus(){
 
 function percent(){
   console.log(value);
-  value = Number(value) * .01;
-  //value = value.toPrecision(5);
+  value = Number(value) * 0.01;
+  value = value.toPrecision(3);
   value = String(value);
   console.log(value);
   box = value;
   comma();
+  replace = 1;
   document.getElementById("output").innerHTML = box;
 }
 
