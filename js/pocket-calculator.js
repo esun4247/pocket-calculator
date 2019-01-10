@@ -2,6 +2,7 @@ var box = "";
 var value = "";
 var ignoreMinus = 0;
 var replace = 0;
+var presCount = 0;
 
 
 function checkReplace(){
@@ -41,7 +42,7 @@ function comma(){
       dec = 1;
     }
   }
-  for(let j = box.length-5; j >= 0; j--){
+  for(let j = 0; j <= presCount; j++){
     if(h[j] === "-"){
       h.splice(j, 1);
       neg = 1;
@@ -65,10 +66,17 @@ function comma(){
       h.splice((-3-(4*u)), 0, ",");
       u++;
     }
+    if(presCount == 1){
+      for(let j = box.length; j > 0; j--){
+        if(h[j] === ","){
+          h.splice(j, 1);
+        }
+      }
+    }
     box = h.join("");
+    }
     if(neg == 1){
     box = "-" + box;
-    }
   }
 }
 
@@ -189,15 +197,35 @@ function plusMinus(){
 }
 
 function percent(){
-  console.log(value);
+  let h = value.split("");
+  let numCount = 0;
+  let rmCom = 0;
+  for(let i = 0; i < h.length; i++){
+    if(h[i] !== "0" && h[i] !== "." && h[i] !== "-" && h[i] !== "e"){
+      numCount++;
+    }else if(h[i] === "e"){
+        break;
+    }
+  }
+  console.log(numCount);
+  if(numCount > 6){
+    presCount = 6;
+  }else{
+    presCount = numCount;
+  }
+  console.log(presCount);
   value = Number(value) * 0.01;
-  value = value.toPrecision(3);
+  value = value.toPrecision(presCount);
   value = String(value);
   console.log(value);
   box = value;
   comma();
   replace = 1;
   document.getElementById("output").innerHTML = box;
+}
+
+function plus(){
+  console.log(eval("2+2*4"));
 }
 
 function ac(){
