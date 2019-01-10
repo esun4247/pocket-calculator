@@ -80,81 +80,17 @@ function comma(){
   }
 }
 
-function num1(){
+function num(x){
   checkReplace();
-  box = box + "1";
-  value = value + "1";
-  comma();
-  document.getElementById("output").innerHTML = box;
-}
-
-function num2(){
-  checkReplace();
-  box = box + "2";
-  value = value + "2";
-  comma();
-  document.getElementById("output").innerHTML = box;
-}
-
-function num3(){
-  checkReplace();
-  box = box + "3";
-  value = value + "3";
-  comma();
-  document.getElementById("output").innerHTML = box;
-}
-
-function num4(){
-  checkReplace();
-  box = box + "4";
-  value = value + "4";
-  comma();
-  document.getElementById("output").innerHTML = box;
-}
-
-function num5(){
-  checkReplace();
-  box = box + "5";
-  value = value + "5";
-  comma();
-  document.getElementById("output").innerHTML = box;
-}
-
-function num6(){
-  checkReplace();
-  box = box + "6";
-  value = value + "6";
-  comma();
-  document.getElementById("output").innerHTML = box;
-}
-
-function num7(){
-  checkReplace();
-  box = box + "7";
-  value = value + "7";
-  comma();
-  document.getElementById("output").innerHTML = box;
-}
-
-function num8(){
-  checkReplace();
-  box = box + "8";
-  value = value + "8";
-  comma();
-  document.getElementById("output").innerHTML = box;
-}
-
-function num9(){
-  checkReplace();
-  box = box + "9";
-  value = value + "9";
+  box = box + x;
+  value = value + x;
   comma();
   document.getElementById("output").innerHTML = box;
 }
 
 function num0(){
   checkReplace();
-  if(box == "0"){
+  if(box == "0" || box == "-"){
   box = 0;
   }else{
   box = box + "0";
@@ -208,8 +144,8 @@ function percent(){
     }
   }
   console.log(numCount);
-  if(numCount > 6){
-    presCount = 6;
+  if(numCount > 5){
+    presCount = 5;
   }else{
     presCount = numCount;
   }
