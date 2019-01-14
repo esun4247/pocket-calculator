@@ -233,5 +233,6 @@ function ac(){
 	multDiv = 0;
   ignoreMinus = 0;
 	eqPress = 0;
+  replace = 0;
   document.getElementById("output").innerHTML = "0";
 }
