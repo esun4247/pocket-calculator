@@ -115,7 +115,7 @@ function plusMinus(){
     document.getElementById("output").innerHTML = box;
   }else if(Number(value) < 0){
     let o = box.split("");
-    for(let j = box.length; j >= 0; j--){
+    for(let j = 0; j <= 1; j++){
       if(o[j] === "-"){
         o.splice(j, 1);
       }
@@ -161,7 +161,11 @@ function percent(){
 }
 
 function plus(){
-  console.log(eval("2+2*4"));
+  let num1 = value;
+  box = 0;
+  value = 0;
+  
+  
 }
 
 function ac(){
