@@ -8,7 +8,6 @@ var addSub = 0;
 var multDiv = 0;
 var eqPress = 0;
 
-
 function checkReplace(){
 	if(replace == 1){
   	box = "";
@@ -147,6 +146,7 @@ function plusMinus(){
     value = p.join("");
     document.getElementById("output").innerHTML = box;
   }
+	eqPress = 0;
 }
 
 function percent(){
@@ -175,15 +175,18 @@ function percent(){
   comma();
   replace = 1;
   document.getElementById("output").innerHTML = box;
+  addSub = 0;
+  multDiv = 0;
+  eqPress = 0;
 }
 
 function addSubtract(opp){
-	if(multDiv == 0 && addSub == 0){
+	if(addSub == 0 && multDiv == 0){
 		operate = value;
 		operate += opp;
 		replace = 1;
 		addSub = 1;
-	}else if(multDiv == 0 && addSub == 1){
+	}else if(addSub == 1 || multDiv == 1){
 		equal();
 		operate += opp;
 		eqPress = 0;
@@ -201,13 +204,16 @@ function multDivide(opp){
 		equal();
 		operate += opp;
 		eqPress = 0;
-		console.log(operate);
-	}else if(multDiv = 0 && addSub ==1){
+	}else if(multDiv == 0 && addSub == 1){
+  	operate += value;
 		operate += opp;
+    eqPress = 0;
+    replace = 1;
 	}
 }
 
 function equal(x){
+console.log(operate);
 	if(eqPress == 0){
 		operate += value;
 		value = eval(operate);
@@ -215,6 +221,7 @@ function equal(x){
 		comma();
 		document.getElementById("output").innerHTML = box;
 		replace = 1;
+    console.log("oof");
 	}else{
 		value = eval(operate);
 		box = String(value);
@@ -222,6 +229,7 @@ function equal(x){
 		document.getElementById("output").innerHTML = box;
 		replace = 1;
 	}
+  value = String(value);
 	eqPress = 1;
 }
 
