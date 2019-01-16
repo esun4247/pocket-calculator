@@ -42,6 +42,16 @@ function sciNot(){
 	}
 }
 
+function error(){
+	const MAX = Math.pow(9.99999, 99);
+  const MIN = Math.pow(-9.99999, 99);
+	if(value > MAX || value < MIN || value == "Infinity"){
+  	console.log("oof");
+  	ac();
+    document.getElementById("output").innerHTML = "Error";
+  }
+}
+
 function limit(){
 	if(Number(value) >= 0){
     ignoreMinus = 0;
@@ -56,16 +66,7 @@ function limit(){
 }
 
 function comma(){
-  if(Number(value) >= 0){
-    ignoreMinus = 0;
-  }else if(Number(value) < 0){
-    ignoreMinus = 1;
-  }
-  if(ignoreMinus == 0){
-    if(box.length > 11) box = box.substring(0, 11);
-  }else{
-    if(box.length > 12) box = box.substring(0, 12);
-  }
+  limit();
   let h = box.split("");
   let h1 = [];
   let h2 = [];
@@ -129,6 +130,7 @@ function num(x){
   value = value + x;
   comma();
   document.getElementById("output").innerHTML = box;
+  error();
 }
 
 function num0(){
@@ -141,6 +143,7 @@ function num0(){
   }
   comma();
   document.getElementById("output").innerHTML = box;
+  error();
 }
 
 function dec(){
@@ -149,6 +152,7 @@ function dec(){
   value = value + ".";
   comma();
   document.getElementById("output").innerHTML = box;
+  error();
 }
 
 function plusMinus(){
@@ -201,7 +205,8 @@ function percent(){
   comma();
   replace = 1;
   document.getElementById("output").innerHTML = box;
-  addSub = 0;
+	error();
+	addSub = 0;
   multDiv = 0;
   eqPress = 0;
 	oppPress = 0;
@@ -267,15 +272,16 @@ function equal(x){
 		sciNot();
 		comma();
 		document.getElementById("output").innerHTML = box;
+    error();
 		clear = 1;
 		replace = 1;
 	}else{
 		value = eval(operate);
 		box = String(value);
-		console.log(operate);
 		sciNot();
 		comma();
 		document.getElementById("output").innerHTML = box;
+		error();
 		clear = 1;
 		replace = 1;
 	}
