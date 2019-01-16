@@ -45,7 +45,7 @@ function sciNot(){
 function error(){
 	const MAX = Math.pow(9.99999, 99);
   const MIN = Math.pow(-9.99999, 99);
-	if(value > MAX || value < MIN || value == "Infinity"){
+	if(value > MAX || value < MIN || value == "Infinity" || value == "undefined"){
   	console.log("oof");
   	ac();
     document.getElementById("output").innerHTML = "Error";
@@ -264,29 +264,31 @@ function multDivide(opp){
 }
 
 function equal(x){
-	if(eqPress == 0){
-		operate += value;
-		value = eval(operate);
-		box = String(value);
-		console.log(operate);
-		sciNot();
-		comma();
-		document.getElementById("output").innerHTML = box;
-    error();
-		clear = 1;
-		replace = 1;
-	}else{
-		value = eval(operate);
-		box = String(value);
-		sciNot();
-		comma();
-		document.getElementById("output").innerHTML = box;
-		error();
-		clear = 1;
-		replace = 1;
-	}
-  value = String(value);
-	eqPress = 1;
+	if(operate.includes("+") == true || operate.includes("-") == true || operate.includes("*") == true || operate.includes("/") == true){
+    if(eqPress == 0){
+      operate += value;
+      value = eval(operate);
+      box = String(value);
+      console.log(value);
+      sciNot();
+      comma();
+      document.getElementById("output").innerHTML = box;
+      error();
+      clear = 1;
+      replace = 1;
+    }else{
+      value = eval(operate);
+      box = String(value);
+      sciNot();
+      comma();
+      document.getElementById("output").innerHTML = box;
+      error();
+      clear = 1;
+      replace = 1;
+    }
+    value = String(value);
+    eqPress = 1;
+  }
 }
 
 function ac(){
