@@ -7,6 +7,7 @@ var operate = "";
 var addSub = 0;
 var multDiv = 0;
 var eqPress = 0;
+var clear = 0;
 
 function checkReplace(){
 	if(replace == 1){
@@ -14,6 +15,31 @@ function checkReplace(){
     value = "";
     replace = 0;
   }
+}
+
+function sciNot(){
+	if(box.length > 9){
+		value = String(value);
+		let h = value.split("");
+		let numCount = 0;
+		for(let i = 0; i < h.length; i++){
+			if(h[i] !== "0" && h[i] !== "." && h[i] !== "-" && h[i] !== "e"){
+				numCount++;
+			}else if(h[i] === "e"){
+					break;
+			}
+		}
+		if(numCount > 5){
+			presCount = 5;
+		}else{
+			presCount = numCount;
+		}
+		value = Number(value);
+		console.log(presCount);
+		value = value.toExponential(presCount);
+		console.log(value);
+		box = String(value);
+	}
 }
 
 function limit(){
@@ -98,6 +124,7 @@ function comma(){
 
 function num(x){
   checkReplace();
+	if(clear == 1) ac();
   box = box + x;
   value = value + x;
   comma();
@@ -160,7 +187,6 @@ function percent(){
         break;
     }
   }
-  console.log(numCount);
   if(numCount > 5){
     presCount = 5;
   }else{
@@ -178,55 +204,79 @@ function percent(){
   addSub = 0;
   multDiv = 0;
   eqPress = 0;
+	oppPress = 0;
 }
 
 function addSubtract(opp){
-	if(addSub == 0 && multDiv == 0){
-		operate = value;
-		operate += opp;
-		replace = 1;
-		addSub = 1;
-	}else if(addSub == 1 || multDiv == 1){
-		equal();
-		operate += opp;
-		eqPress = 0;
-		console.log(operate);
+	if(value === ""){
+			let h = operate.split("");
+			let j = h.length;
+			h.splice(j-1, 1, opp);
+			operate = h.join("");
+	}else{
+		if(addSub == 0 && multDiv == 0){
+			operate = value;
+			operate += opp;
+			value = "";
+			replace = 1;
+			addSub = 1;
+		}else if(addSub == 1 || multDiv == 1){
+			equal();
+			operate += opp;
+			eqPress = 0;
+			console.log(operate);
+		}
+		clear = 0;
 	}
 }
 
 function multDivide(opp){
-	if(multDiv == 0 && addSub == 0){
-		operate = value;
-		operate += opp;
-		replace = 1;
-		multDiv = 1;
-	}else if(multDiv == 1 && addSub == 0){
-		equal();
-		operate += opp;
-		eqPress = 0;
-	}else if(multDiv == 0 && addSub == 1){
-  	operate += value;
-		operate += opp;
-    eqPress = 0;
-    replace = 1;
+	if(value === ""){
+			let h = operate.split("");
+			let j = h.length;
+			h.splice(j-1, 1, opp);
+			operate = h.join("");
+	}else{
+		if(multDiv == 0 && addSub == 0){
+			operate = value;
+			operate += opp;
+			value = "";
+			replace = 1;
+			multDiv = 1;
+		}else if(multDiv == 1 && addSub == 0){
+			equal();
+			operate += opp;
+			eqPress = 0;
+		}else if(multDiv == 0 && addSub == 1){
+	  	operate += value;
+			operate += opp;
+	    eqPress = 0;
+			value = "";
+	    replace = 1;
+		}
+		clear = 0;
 	}
 }
 
 function equal(x){
-console.log(operate);
 	if(eqPress == 0){
 		operate += value;
 		value = eval(operate);
 		box = String(value);
+		console.log(operate);
+		sciNot();
 		comma();
 		document.getElementById("output").innerHTML = box;
+		clear = 1;
 		replace = 1;
-    console.log("oof");
 	}else{
 		value = eval(operate);
 		box = String(value);
+		console.log(operate);
+		sciNot();
 		comma();
 		document.getElementById("output").innerHTML = box;
+		clear = 1;
 		replace = 1;
 	}
   value = String(value);
@@ -242,5 +292,6 @@ function ac(){
   ignoreMinus = 0;
 	eqPress = 0;
   replace = 0;
+	clear = 0;
   document.getElementById("output").innerHTML = "0";
 }
