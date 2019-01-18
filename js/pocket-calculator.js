@@ -175,7 +175,7 @@ function dec(){
 	}
   error();
 }
-
+ 
 function plusMinus(){
 	if(addSub == 1 || multDiv == 1){
 		checkReplace();
