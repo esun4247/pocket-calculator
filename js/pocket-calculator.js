@@ -8,6 +8,7 @@ var addSub = 0;
 var multDiv = 0;
 var eqPress = 0;
 var clear = 0;
+var dneg = 0;
 
 function checkReplace(){
 	if(replace == 1){
@@ -35,18 +36,28 @@ function sciNot(){
 			presCount = numCount;
 		}
 		value = Number(value);
-		console.log(presCount);
 		value = value.toExponential(presCount);
-		console.log(value);
 		box = String(value);
 	}
 }
 
 function error(){
-	const MAX = Math.pow(9.99999, 99);
-  const MIN = Math.pow(-9.99999, 99);
-	if(value > MAX || value < MIN || value == "Infinity" || value == "undefined"){
-  	console.log("oof");
+	const MAX = (9.9999*(10**99));
+	const MAXL = (1*(10**-99))
+  const MIN = (-9.9999*(10**99));
+	const MINL = (-1*(10**-99));
+	if(value > 0){
+		if(value > MAX || value < MAXL){
+			ac();
+	    document.getElementById("output").innerHTML = "Error";
+		}
+	}else if(value < 0){
+		if(value < MIN || value > MINL){
+			ac();
+	    document.getElementById("output").innerHTML = "Error";
+		}
+	}
+	if(value == "Infinity" || value == "undefined"){
   	ac();
     document.getElementById("output").innerHTML = "Error";
   }
@@ -148,14 +159,27 @@ function num0(){
 
 function dec(){
   checkReplace();
+	let zero = 0;
+	if(box === ""){
+		box = box + "0";
+		value = value + "0";
+		zero = 1;
+	}
   box = box + ".";
   value = value + ".";
   comma();
-  document.getElementById("output").innerHTML = box;
+	if(zero == 0){
+	  document.getElementById("output").innerHTML = box;
+	}else{
+		document.getElementById("output").innerHTML = box + "0";
+	}
   error();
 }
 
 function plusMinus(){
+	if(addSub == 1 || multDiv == 1){
+		checkReplace();
+	}
   if(Number(value) >= 0){
     box = "-" + box;
     value = "-" + value;
@@ -181,38 +205,41 @@ function plusMinus(){
 }
 
 function percent(){
-  let h = value.split("");
-  let numCount = 0;
-  let rmCom = 0;
-  for(let i = 0; i < h.length; i++){
-    if(h[i] !== "0" && h[i] !== "." && h[i] !== "-" && h[i] !== "e"){
-      numCount++;
-    }else if(h[i] === "e"){
-        break;
-    }
-  }
-  if(numCount > 5){
-    presCount = 5;
-  }else{
-    presCount = numCount;
-  }
-  console.log(presCount);
-  value = Number(value) * 0.01;
-  value = value.toPrecision(presCount);
-  value = String(value);
-  console.log(value);
-  box = value;
-  comma();
-  replace = 1;
-  document.getElementById("output").innerHTML = box;
-	error();
-	addSub = 0;
-  multDiv = 0;
-  eqPress = 0;
-	oppPress = 0;
+	if(addSub != 1 || multDiv != 1){
+	  let h = value.split("");
+	  let numCount = 0;
+	  let rmCom = 0;
+	  for(let i = 0; i < h.length; i++){
+	    if(h[i] !== "0" && h[i] !== "." && h[i] !== "-" && h[i] !== "e"){
+	      numCount++;
+	    }else if(h[i] === "e"){
+	        break;
+	    }
+	  }
+	  if(numCount > 5){
+	    presCount = 5;
+	  }else{
+	    presCount = numCount;
+	  }
+	  value = Number(value) * 0.01;
+	  value = value.toPrecision(presCount);
+	  value = String(value);
+	  box = value;
+	  comma();
+	  replace = 1;
+	  document.getElementById("output").innerHTML = box;
+		error();
+		addSub = 0;
+	  multDiv = 0;
+	  eqPress = 0;
+		oppPress = 0;
+	}
 }
 
 function addSubtract(opp){
+	if(opp == "-"){
+		dneg = 1;
+	}
 	if(value === ""){
 			let h = operate.split("");
 			let j = h.length;
@@ -229,7 +256,6 @@ function addSubtract(opp){
 			equal();
 			operate += opp;
 			eqPress = 0;
-			console.log(operate);
 		}
 		clear = 0;
 	}
@@ -265,11 +291,22 @@ function multDivide(opp){
 
 function equal(x){
 	if(operate.includes("+") == true || operate.includes("-") == true || operate.includes("*") == true || operate.includes("/") == true){
+		if(x == "1"){
+			addSub = 0;
+			multDiv = 0;
+		}
+		if(dneg == 1){
+			let h = value.split("");
+			h.push(")")
+			h.unshift("(")
+			value = h.join("");
+			value = String(value);
+			dneg = 0;
+		}
     if(eqPress == 0){
       operate += value;
       value = eval(operate);
       box = String(value);
-      console.log(value);
       sciNot();
       comma();
       document.getElementById("output").innerHTML = box;
