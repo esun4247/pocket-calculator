@@ -57,7 +57,7 @@ function error(){
 	    document.getElementById("output").innerHTML = "Error";
 		}
 	}
-	if(value == "Infinity" || value == "undefined"){
+	if(value == "Infinity" || value == "undefined" || value == "NaN"){
   	ac();
     document.getElementById("output").innerHTML = "Error";
   }
